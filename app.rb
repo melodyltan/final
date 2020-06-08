@@ -81,7 +81,6 @@ end
 
 # Receiving end of login form
 post "/logins/create" do
-    puts params
     email_entered = params["email"]
     password_entered = params["password"]
     # SELECT * FROM users WHERE email = email_entered
