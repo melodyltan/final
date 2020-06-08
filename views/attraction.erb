@@ -10,9 +10,9 @@
             <% user = @users_table.where(:id => review[:user_id]).to_a[0] %>
             <div class="media">
                 <% if review[:recommend] %>
-                    <i class="fas fa-thumbs-up fa-3x mr-3"></i>
+                    <i class="far fa-thumbs-up"></i>
                 <% else %>
-                    <i class="fas fa-thumbs-down fa-3x mr-3"></i>
+                    <i class="far fa-thumbs-down"></i>
                 <% end %>
                 <div class="media-body">
                     <h5 class="mt-0"><%= user[:name] %></h5>
