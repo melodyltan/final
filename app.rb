@@ -45,7 +45,7 @@ get "/attractions/:id" do
     view "attraction"
 end
 
-# Form to create a new user review
+# Form to create a new review
 get "/attractions/:id/reviews/new" do
     @attraction = attractions_table.where(:id => params["id"]).to_a[0]
     view "new_review"
@@ -85,12 +85,11 @@ post "/logins/create" do
     password_entered = params["password"]
     # SELECT * FROM users WHERE email = email_entered
     user = users_table.where(:email => email_entered).to_a[0]
-    # if users_table.where(:email => email_entered).to_a.length > 0
     
-    # First, test for valid email
+    # Step 1: Test for valid email
     if user 
         puts user.inspect
-        # Next, test the password_entered againt the one in the users table
+        # Step 2: Test the password_entered
         if BCrypt::Password.new(user[:password]) == password_entered
             session[:user_id] = user[:id]
         view "create_login"
@@ -104,5 +103,6 @@ end
 
 # Logout
 get "/logout" do
+    session[:user_id] = nil
     view "logout"
 end
