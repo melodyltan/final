@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h1><img src="/images/<%=@attraction[:title]%>.jpg" style="width:250px;height:250px;"</h1>
+        
+        <h1><%= @attraction[:title] %></h1>
+        <p><%= @attraction[:description] %></p>
+
+
+        <% for review in @reviews %>
+            <% user = @users_table.where(:id => review[:user_id]).to_a[0] %>
+            <div class="media">
+                <% if review[:recommend] %>
+                    <i class="fas fa-thumbs-up fa-3x mr-3"></i>
+                <% else %>
+                    <i class="fas fa-thumbs-down fa-3x mr-3"></i>
+                <% end %>
+                <div class="media-body">
+                    <h5 class="mt-0"><%= user[:name] %></h5>
+                    <%= review[:comments] %>
+                </div>
+            </div>
+        <% end %>
+
+        <p class="mt-5">
+            <a href="/attractions/<%= @attraction[:id] %>/reviews/new" class="btn btn-primary">Write a review</a>
+        </p>
+    </div>
+    <div class="col-sm-3">        
+        <h3>Category</h3>
+        <p><%= @attraction[:category] %></p>    
+        <h3>Address</h3>
+        <p><%= @attraction[:location] %></p>
+        <h3>Rating</h3>
+        <p>Recommended by <%= @count_recommend %> visitors </p>
+    </div>
+</div>

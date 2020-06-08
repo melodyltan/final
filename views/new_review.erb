@@ -1,0 +1,18 @@
+
+<h1>Review for <%= @attraction[:title] %></h1>
+
+<form action="/attractions/<%= @attraction[:id] %>/reviews/create" method="POST">
+<div class="form-group">
+    <label>Do you recommend this attraction?</label>
+    <select class="form-control" name="recommend">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label>Comments</label>
+    <textarea class="form-control" rows="3" name="comments"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
