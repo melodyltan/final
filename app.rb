@@ -71,7 +71,16 @@ post "/users/create" do
     users_table.insert(:name => params["name"],
                        :email => params["email"],
                        :password => BCrypt::Password.create(params["password"]))
-    view "create_user"
+    # read your API credentials from environment variables
+    account_sid = ENV["TWILIO_ACCOUNT_SID"]
+    auth_token = ENV["TWILIO_AUTH_TOKEN"]
+    # set up a client to talk to the Twilio REST API
+    client = Twilio::REST::Client.new(account_sid, auth_token)
+    # send the SMS from your trial Twilio number to your verified non-Twilio number
+    client.messages.create(from: "+12012988938", 
+                           to: "+18728066437",
+                           body: "Welcome to See Singapore! For more information on any tourist attraction, call the See Singapore hotline: (+65) 1122 8899. Our service team is available from 9AM-5PM everyday.")    
+                       view "create_user"
 end
 
 # Form to login
