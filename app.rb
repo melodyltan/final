@@ -40,6 +40,8 @@ get "/attractions/:id" do
     @reviews = reviews_table.where(:attraction_id => params["id"]).to_a
     # SELECT COUNT(*) FROM reviews WHERE attraction_id=:id AND recommend=1
     @count_recommend = reviews_table.where(:attraction_id => params["id"], :recommend => true).count
+    results = Geocoder.search(@attraction[:location])
+    @lat_long = results.first.coordinates.join(",")
     view "attraction"
 end
 
