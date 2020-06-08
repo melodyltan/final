@@ -5,6 +5,7 @@
         <h1><%= @attraction[:title] %></h1>
         <p><%= @attraction[:description] %></p>
 
+       <h3>What do visitors say about this attraction?</h3>
 
         <% for review in @reviews %>
             <% user = @users_table.where(:id => review[:user_id]).to_a[0] %>
