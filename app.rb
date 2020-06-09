@@ -69,6 +69,7 @@ end
 # Receiving end of new user form
 post "/users/create" do
     users_table.insert(:name => params["name"],
+                       :mobile => params["mobile"],
                        :email => params["email"],
                        :password => BCrypt::Password.create(params["password"]))
     # read your API credentials from environment variables
